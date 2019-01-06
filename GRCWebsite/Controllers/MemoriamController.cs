@@ -23,5 +23,10 @@ namespace GRCWebsite.Controllers
         {
             return View();
         }
+
+        public ActionResult Dual()
+        {
+            return View();
+        }
     }
 }

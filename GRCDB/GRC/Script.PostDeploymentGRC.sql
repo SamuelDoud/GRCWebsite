@@ -10,11 +10,14 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-INSERT INTO [grc].[Persons] ([Name], Email, Gender, [Profile], IsActive)
+INSERT INTO [grc].[Persons] ([Name], NickName, Email, Gender, IsActive, BirthDate, Undergraduate, Graduate)
 VALUES
-	('Jerry Alexander', 'jerry.alexander@live.com', 'M', 'beep', 1),
-	('Samuel Doud', 'samueldoud@me.com', 'M', 'beep', 1);
+	('Nina May Brekelmans', 'Nina', NULL, 'F', 0, '1990-03-06', 'Dartmouth College', Null),
+	('Lauren Woodall Roady', 'Lauren', NULL, 'F', 0, '1985-10-20', 'Davidson College', NULL),
+	('Jerry Alexander', 'Jerry', 'jerry.alexander@live.com', 'M', 1, NULL, 'Columbia University', 'Villanova University'),
+	('Samuel Doud', 'Mileage Sam', 'samueldoud@me.com', 'M', 1, '1995-10-23', 'American University', NULL);
 
 INSERT INTO [grc].[Roles] (PersonId, Title)
-VALUES (1, 'Head Coach');
+VALUES
+	(3, 'Head Coach');
 	

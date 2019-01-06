@@ -213,6 +213,7 @@
       <DependentUpon>GRCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonResult.cs" />
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\RacesModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>GRCEntity.tt</DependentUpon>
@@ -253,9 +254,10 @@
     <Content Include="Models\GRCEntity.edmx.diagram">
       <DependentUpon>GRCEntity.edmx</DependentUpon>
     </Content>
-    <Content Include="Assets\Text\Profiles\Nina.md" />
-    <Content Include="Assets\Text\Profiles\Lauren.md" />
-    <Content Include="Assets\Text\Profiles\Jerry.md" />
+    <Content Include="Assets\Documents\2012.06.23_grc_bylaws.pdf" />
+    <Content Include="Assets\Documents\grc_code_of_conduct.pdf" />
+    <Content Include="Assets\Documents\grc_member_waiver.pdf" />
+    <Content Include="Assets\Documents\grc_photorelease.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -307,6 +309,7 @@
     <Content Include="Views\Events\UpcomingRaces.cshtml" />
     <Content Include="Views\Events\Results.cshtml" />
     <Content Include="Views\Join\Index.cshtml" />
+    <Content Include="Views\Memoriam\DuelOnTheMall.cshtml" />
     <None Include="Views\Roster\PerformanceList.cshtml" />
     <Content Include="Views\Archives\Index.cshtml" />
     <Content Include="Views\Business\Index.cshtml" />
@@ -317,6 +320,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Images\Profiles\" />
+    <Folder Include="Assets\Text\Profiles\" />
+    <Folder Include="Assets\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
