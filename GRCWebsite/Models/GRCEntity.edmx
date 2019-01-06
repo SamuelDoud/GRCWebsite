@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GRCDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surface" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalRecords">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="RaceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GRC" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="16" />
+          <Property Name="AlmaMater" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsRegistered" Type="bit" Nullable="false" />
+          <Property Name="Profile" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BeginDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_PersonalRecords_Event">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="PersonalRecords" Type="Self.PersonalRecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalRecords">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalRecords_Person">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="PersonalRecords" Type="Self.PersonalRecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalRecords">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Person">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GRCDBModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="grc" store:Type="Tables" />
+          <EntitySet Name="PersonalRecords" EntityType="Self.PersonalRecords" Schema="grc" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="grc" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="grc" store:Type="Tables" />
+          <AssociationSet Name="FK_PersonalRecords_Event" Association="Self.FK_PersonalRecords_Event">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="PersonalRecords" EntitySet="PersonalRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalRecords_Person" Association="Self.FK_PersonalRecords_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PersonalRecords" EntitySet="PersonalRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Person" Association="Self.FK_Roles_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GRCDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GRCDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="GRCDBModel.Event" />
+          <EntitySet Name="PersonalRecords" EntityType="GRCDBModel.PersonalRecord" />
+          <EntitySet Name="Persons" EntityType="GRCDBModel.Person" />
+          <AssociationSet Name="FK_PersonalRecords_Event" Association="GRCDBModel.FK_PersonalRecords_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="PersonalRecord" EntitySet="PersonalRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalRecords_Person" Association="GRCDBModel.FK_PersonalRecords_Person">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="PersonalRecord" EntitySet="PersonalRecords" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="GRCDBModel.Role" />
+          <AssociationSet Name="FK_Roles_Person" Association="GRCDBModel.FK_Roles_Person">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Surface" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PersonalRecords" Relationship="GRCDBModel.FK_PersonalRecords_Event" FromRole="Event" ToRole="PersonalRecord" />
+        </EntityType>
+        <EntityType Name="PersonalRecord">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="RaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GRC" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="GRCDBModel.FK_PersonalRecords_Event" FromRole="PersonalRecord" ToRole="Event" />
+          <NavigationProperty Name="Person" Relationship="GRCDBModel.FK_PersonalRecords_Person" FromRole="PersonalRecord" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="AlmaMater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsRegistered" Type="Boolean" Nullable="false" />
+          <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="PersonalRecords" Relationship="GRCDBModel.FK_PersonalRecords_Person" FromRole="Person" ToRole="PersonalRecord" />
+          <NavigationProperty Name="Roles" Relationship="GRCDBModel.FK_Roles_Person" FromRole="Person" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_PersonalRecords_Event">
+          <End Type="GRCDBModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="GRCDBModel.PersonalRecord" Role="PersonalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalRecord">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalRecords_Person">
+          <End Type="GRCDBModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GRCDBModel.PersonalRecord" Role="PersonalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalRecord">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="GRCDBModel.FK_Roles_Person" FromRole="Role" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Roles_Person">
+          <End Type="GRCDBModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GRCDBModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GRCDBModelStoreContainer" CdmEntityContainer="GRCDBEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="GRCDBModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Surface" ColumnName="Surface" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalRecords">
+            <EntityTypeMapping TypeName="GRCDBModel.PersonalRecord">
+              <MappingFragment StoreEntitySet="PersonalRecords">
+                <ScalarProperty Name="GRC" ColumnName="GRC" />
+                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="GRCDBModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AlmaMater" ColumnName="AlmaMater" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GRCDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

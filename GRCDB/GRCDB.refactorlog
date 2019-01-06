@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="bdb3215a-46f4-442b-ab1b-1afccb63dd72" ChangeDateTime="01/05/2019 23:08:43">
+    <Property Name="ElementName" Value="[dbo].[PersonalRecords].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PersonalRecords]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d4ddb42d-c1b1-4103-8df4-6d690abdc6cd" ChangeDateTime="01/05/2019 23:08:45">
+    <Property Name="ElementName" Value="[dbo].[PersonalRecords].[PersonID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PersonalRecords]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2704ffe5-a607-4e3c-9b83-a7be63af9742" ChangeDateTime="01/05/2019 23:12:03">
+    <Property Name="ElementName" Value="[grc].[Roles].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Roles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7b31567b-48af-46bd-9070-cf0b76274088" ChangeDateTime="01/05/2019 23:12:05">
+    <Property Name="ElementName" Value="[grc].[Roles].[PersonID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Roles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b3e7cc75-b041-40cd-99d2-e015387c05f9" ChangeDateTime="01/05/2019 23:16:45">
+    <Property Name="ElementName" Value="[grc].[Events].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="12f434bd-3ee0-4536-a458-f951b1a87879" ChangeDateTime="01/05/2019 23:16:48">
+    <Property Name="ElementName" Value="[grc].[Events].[EventID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f8257894-8704-41fd-ad03-0fb68bcf1bad" ChangeDateTime="01/05/2019 23:18:25">
+    <Property Name="ElementName" Value="[grc].[Events].[EventId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5146640a-8bff-4287-9eef-83c0b314a721" ChangeDateTime="01/06/2019 15:52:52">
+    <Property Name="ElementName" Value="[grc].[Roles].[Role]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Roles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Title" />
+  </Operation>
+</Operations>
