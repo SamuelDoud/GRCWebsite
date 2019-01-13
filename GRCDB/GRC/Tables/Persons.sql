@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] VARCHAR(128) NOT NULL, 
     [NickName] NVARCHAR(64) NULL,
-    [Email] NVARCHAR(50) NOT NULL, 
+    [Email] NVARCHAR(50) NULL, 
     [PhoneNumber] VARCHAR(16) NULL, 
     [IsActive] BIT NOT NULL,
 	[IsRegistered] BIT DEFAULT 0 NOT NULL,

@@ -8,6 +8,6 @@ namespace GRCWebsite.Models
     public class ProfileModel
     {
         public Person Person { get; set; }
-        public PersonalRecord PersonalRecords { get; set; }
+        public List<PersonalRecord> PersonalRecords { get; set; }
     }
 }

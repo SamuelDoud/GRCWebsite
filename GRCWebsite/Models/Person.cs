@@ -25,11 +25,15 @@ namespace GRCWebsite.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string AlmaMater { get; set; }
         public bool IsActive { get; set; }
         public bool IsRegistered { get; set; }
         public string Profile { get; set; }
         public string Gender { get; set; }
+        public string NickName { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public string Undergraduate { get; set; }
+        public string Graduate { get; set; }
+        public string AdditionalSchools { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonalRecord> PersonalRecords { get; set; }

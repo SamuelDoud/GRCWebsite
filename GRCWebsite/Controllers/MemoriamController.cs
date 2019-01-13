@@ -24,7 +24,7 @@ namespace GRCWebsite.Controllers
             return View();
         }
 
-        public ActionResult Dual()
+        public ActionResult DuelOnTheMall()
         {
             return View();
         }

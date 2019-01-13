@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Distance" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Surface" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
@@ -29,15 +29,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="64" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="16" />
-          <Property Name="AlmaMater" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsRegistered" Type="bit" Nullable="false" />
           <Property Name="Profile" Type="nvarchar(max)" />
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Undergraduate" Type="varchar" MaxLength="50" />
+          <Property Name="Graduate" Type="varchar" MaxLength="50" />
+          <Property Name="AdditionalSchools" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -156,13 +160,17 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="AlmaMater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsRegistered" Type="Boolean" Nullable="false" />
           <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="PersonalRecords" Relationship="GRCDBModel.FK_PersonalRecords_Person" FromRole="Person" ToRole="PersonalRecord" />
           <NavigationProperty Name="Roles" Relationship="GRCDBModel.FK_Roles_Person" FromRole="Person" ToRole="Role" />
+          <Property Name="NickName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Undergraduate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Graduate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalSchools" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_PersonalRecords_Event">
           <End Type="GRCDBModel.Event" Role="Event" Multiplicity="1" />
@@ -241,11 +249,15 @@
           <EntitySetMapping Name="Persons">
             <EntityTypeMapping TypeName="GRCDBModel.Person">
               <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="AdditionalSchools" ColumnName="AdditionalSchools" />
+                <ScalarProperty Name="Graduate" ColumnName="Graduate" />
+                <ScalarProperty Name="Undergraduate" ColumnName="Undergraduate" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Profile" ColumnName="Profile" />
                 <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="AlmaMater" ColumnName="AlmaMater" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

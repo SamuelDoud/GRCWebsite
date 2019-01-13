@@ -1,8 +1,12 @@
-﻿
+﻿@model GRCWebsite.Models.ProfileModel
 @{
     ViewBag.Title = "Profile";
 }
 
 <h2>Profile</h2>
 
-<!-- Insert Personal Profile partial view here -->
+@if (ViewBag.CanEdit)
+{
+    Html.RenderPartial("_EditProfile");
+}
+@{Html.RenderPartial("_PersonalProfile");}

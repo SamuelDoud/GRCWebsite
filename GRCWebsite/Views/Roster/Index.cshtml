@@ -1,0 +1,115 @@
+﻿@model GRCWebsite.Models.TeamModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Team Roster</h2>
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingWomensTeam">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#WomensTeam" aria-expanded="false" aria-controls="WomensTeam">
+                    Women's Team
+                </button>
+            </h5>
+        </div>
+
+        <div id="WomensTeam" class="collapse hide" aria-labelledby="headingWomensTeam" data-parent="#accordion">
+            <div class="card-body">
+                <table id="WomensTeamTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var person in Model.FemaleTeamMembers)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    @Html.ActionLink(person.Person.Name, "ProfilePage", "Roster", new { id = person.Person.Id }, null)
+                                </th>
+                                <th scope="row">
+                                    @person.Person.Profile
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingMensTeam">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#MensTeam" aria-expanded="false" aria-controls="MensTeam">
+                    Men's Team
+                </button>
+            </h5>
+        </div>
+
+        <div id="MensTeam" class="collapse hide" aria-labelledby="headingMensTeam" data-parent="#accordion">
+            <div class="card-body">
+                <table id="MensTeamTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var person in Model.MaleTeamMembers)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    @Html.ActionLink(person.Person.Name, "ProfilePage", "Roster", new { id = person.Person.Id }, null)
+                                </th>
+                                <th scope="row">
+                                    @person.Person.Profile
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingExPats">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#ExPatsTeam" aria-expanded="false" aria-controls="ExPatsTeam">
+                    Ex-Pats
+                </button>
+            </h5>
+        </div>
+
+        <div id="ExPatsTeam" class="collapse hide" aria-labelledby="headingExPats" data-parent="#accordion">
+            <div class="card-body">
+                <table id="ExPatsTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var person in Model.Expats)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    @Html.ActionLink(person.Person.Name, "ProfilePage", "Roster", new { id = person.Person.Id }, null)
+                                </th>
+                                <th scope="row">
+                                    @person.Person.Profile
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
