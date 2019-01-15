@@ -1,7 +1,79 @@
 ﻿
+@using GRCWebsite.Models
+@model GRCWebsite.Models.RecordsModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Performance List";
 }
 
-<h2>Index</h2>
+<h2>Records</h2>
+
+<div id="accordion">
+    @foreach (PerEventRecordsModel prs in Model.PersonResults)
+    {
+        <div class="card">
+            <div class="card-header" id="headingTeam@(Html.Raw(prs.Event.Distance + prs.Event.Surface))">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#MensRecords@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" aria-expanded="false" aria-controls="WomensTeam">
+                        @(prs.Event.Distance) on @(prs.Event.Surface)
+                    </button>
+                </h5>
+            </div>
+            <div class="col-md-6">
+                <div id="MensRecords@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" class="collapse hide" aria-labelledby="headingTeam@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" data-parent="#accordion">
+                    <div class="card-body">
+                        <table id="MensTeamTable@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th>Time</th>
+                                    <th>Date</th>
+                                    <th>Race Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var men in prs.TopResultsMales)
+                                    {
+                                        <th scope="row">@(men.Person.Name)</th>
+                                        <th>@(men.Time.ToString())</th>
+                                        <th>@(men.Date.ToString())</th>
+                                        <th>@(men.RaceName)</th>
+                                    }
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="WomensRecords@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" class="collapse hide" aria-labelledby="headingTeam@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" data-parent="#accordion">
+                    <div class="card-body">
+                        <table id="WomensTeamTable@(Html.Raw(prs.Event.Distance + prs.Event.Surface))" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th>Time</th>
+                                    <th>Date</th>
+                                    <th>Race Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var men in prs.TopResultsFemales)
+                                    {
+                                        <th scope="row">@(men.Person.Name)</th>
+                                        <th>@(men.Time.ToString())</th>
+                                        <th>@(men.Date.ToString())</th>
+                                        <th>@(men.RaceName)</th>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 

@@ -202,6 +202,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PerEventRecordsModel.cs" />
     <Compile Include="Models\Person.cs">
       <DependentUpon>GRCEntity.tt</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Compile Include="Models\EditProfileModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\RacesModel.cs" />
+    <Compile Include="Models\RecordsModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>GRCEntity.tt</DependentUpon>
     </Compile>

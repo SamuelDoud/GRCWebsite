@@ -20,14 +20,22 @@ namespace GRCWebsite.Controllers
             }
         }
 
-        public ActionResult PerformanceList()
+        [HttpGet]
+        public ActionResult PerformanceList(int year)
         {
-            return View();
+            RecordsModel PerformanceList = new RecordsModel()
+            {
+                Year = year
+            };
+
+            return View(PerformanceList);
         }
 
         public ActionResult Records()
         {
-            return View();
+            RecordsModel PerformanceList = new RecordsModel();
+
+            return View(PerformanceList);
         }
 
         [HttpGet]

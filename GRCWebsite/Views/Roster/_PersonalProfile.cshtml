@@ -1,3 +1,37 @@
-﻿@model GRCWebsite.Models.ProfileModel
+﻿@using GRCWebsite.Models
+@model GRCWebsite.Models.ProfileModel
 
 <!-- Need a PR view-->
+(@Model.Person.Profile)
+
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Distance</th>
+            <th scope="col">Time</th>
+            <th scope="col">Date</th>
+            <th scope="col">Race Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Event> events = Model.PersonalRecords.Select(pr => pr.Event).OrderBy(pr => pr.Distance).ToList();
+
+            foreach (Event e in events)
+            {
+                PersonalRecord tempRecord = Model.PersonalRecords.Where(pr => pr.EventId == e.Id).SingleOrDefault();
+                if (tempRecord.Time != null)
+                {
+                <tr>
+                    <th scope="row">@(e.Distance)</th>
+                    <td>@(tempRecord.Time)</td>
+                    <td>@(tempRecord.Date.Value.ToLongTimeString()</td>
+                    <td>@(tempRecord.RaceName)</td>
+                </tr>
+                    }
+                }
+            }
+    </tbody>
+</table>
