@@ -1,0 +1,5 @@
+﻿CREATE TABLE [grc].[Surfaces]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Surface] VARCHAR(32) NOT NULL
+)

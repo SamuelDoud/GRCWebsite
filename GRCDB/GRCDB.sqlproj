@@ -69,6 +69,8 @@
     <Build Include="GRC\Tables\PersonalRecords.sql" />
     <Build Include="GRC\Tables\Roles.sql" />
     <Build Include="GRC\Tables\Events.sql" />
+    <Build Include="GRC\Tables\Surfaces.sql" />
+    <Build Include="GRC\Tables\Nicknames.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="GRCDB.refactorlog" />

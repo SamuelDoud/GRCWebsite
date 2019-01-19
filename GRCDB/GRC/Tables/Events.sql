@@ -2,5 +2,6 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Distance] VARCHAR(50) NOT NULL, 
-    [Surface] VARCHAR(10) NOT NULL
+    [SurfaceId] INT NOT NULL, 
+    CONSTRAINT [FK_Events_Surfaces] FOREIGN KEY ([SurfaceId]) REFERENCES [grc].[Surfaces]([Id])
 )

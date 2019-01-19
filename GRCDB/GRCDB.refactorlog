@@ -56,4 +56,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Title" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e2043765-421f-48b3-9e0f-95ec5ac29b98" ChangeDateTime="01/19/2019 21:20:31">
+    <Property Name="ElementName" Value="[grc].[Nicknames].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Nicknames]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="83a71802-9508-4183-b37c-aeeed0da7b9b" ChangeDateTime="01/19/2019 21:22:33">
+    <Property Name="ElementName" Value="[grc].[Events].[Distance]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="629d7be5-57a2-4671-b770-8ae326cb9e55" ChangeDateTime="01/19/2019 21:23:19">
+    <Property Name="ElementName" Value="[grc].[Events].[Surface]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SurfaceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8316cb3d-84f0-4cce-9b8b-9f472f2d383d" ChangeDateTime="01/19/2019 22:03:38">
+    <Property Name="ElementName" Value="[grc].[Events].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[grc].[Events]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Distance" />
+  </Operation>
 </Operations>
