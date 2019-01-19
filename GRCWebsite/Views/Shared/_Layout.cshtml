@@ -17,32 +17,32 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-item nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { @class = "nav-item nav-link" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-item nav-link" })</li>
+                    <li><a class="external nav-item nav-link" href="http://blog.grcrunning.com/"> GRC Blog</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown" role="button" aria-expanded="false">Roster<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Roster", "Index", "Roster")</li>
-                            <li>@Html.ActionLink("2019 Performance List", "PerformanceList", "Roster")</li>
-                            <li>@Html.ActionLink("Club Records", "Records", "Roster")</li>
+                            <li>@Html.ActionLink("Roster", "Index", "Roster", null, new { @class = "nav-item nav-link" })</li>
+                            <li>@Html.ActionLink("2019 Performance List", "PerformanceList", "Roster", null, new { @class = "nav-item nav-link" })</li>
+                            <li>@Html.ActionLink("Club Records", "Records", "Roster", null, new { @class = "nav-item nav-link" })</li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown" role="button" aria-expanded="false">Results<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Upcoming Races", "UpcomingRaces", "Events")</li>
-                            <li>@Html.ActionLink("Race Results", "Results", "Events")</li>
+                            <li>@Html.ActionLink("Upcoming Races", "UpcomingRaces", "Events", null, new { @class = "nav-item nav-link" })</li>
+                            <li>@Html.ActionLink("Race Results", "Results", "Events", null, new { @class = "nav-item nav-link" })</li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown" role="button" aria-expanded="false">In Memoriam<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Nina May Brekelmans", "Nina", "Memoriam")</li>
-                            <li>@Html.ActionLink("Lauren Woodall Roady", "Lauren", "Memoriam")</li>
+                            <li>@Html.ActionLink("Nina May Brekelmans", "Nina", "Memoriam", null, new { @class = "nav-item nav-link" })</li>
+                            <li>@Html.ActionLink("Lauren Woodall Roady", "Lauren", "Memoriam", null, new { @class = "nav-item nav-link" })</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Coach Jerry", "Jerry", "Coach", new { @class = "nav-item nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-item nav-link" })</li>
+                    <li>@Html.ActionLink("Coach Jerry", "Jerry", "Coach", null, new { @class = "nav-item nav-link" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-item nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

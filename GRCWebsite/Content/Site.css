@@ -26,3 +26,11 @@ textarea {
 color-navbar {
     background-color: #e3f2fd;
 }
+
+/*a[href^="https://www.ourdomain.com"]*/
+a.external {
+    background: url(/Assets/Images/Icons/External_link.svg) center right no-repeat;
+    width: 25px;
+    height: 25px;
+    padding-right: 13px;
+}
