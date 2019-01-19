@@ -228,10 +228,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\Icons\External_link.svg" />
     <Content Include="Assets\Images\Jerry\faces-of-pacers-jerry.jpg" />
     <Content Include="Assets\Images\Jerry\JerryOT.jpg" />
     <Content Include="Assets\Images\Jerry\JerryPenn2016.jpg" />
     <Content Include="Assets\Images\Lauren\Lauren.jpg" />
+    <Content Include="Assets\Images\Logos\georgetown-running-club-700.png" />
+    <Content Include="Assets\Images\Logos\NewBalance.jpg" />
+    <Content Include="Assets\Images\Logos\Pacers.png" />
+    <Content Include="Assets\Images\Logos\RRCA.jpg" />
     <Content Include="Assets\Images\Nina\Nina.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -365,6 +370,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\Images\Logos\Icons\" />
     <Folder Include="Assets\Images\Profiles\" />
     <Folder Include="Assets\Text\Profiles\" />
     <Folder Include="Assets\Uploads\" />

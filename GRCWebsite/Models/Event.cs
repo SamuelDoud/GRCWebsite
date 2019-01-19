@@ -22,11 +22,10 @@ namespace GRCWebsite.Models
     
         public int Id { get; set; }
         public string Distance { get; set; }
-        public string Surface { get; set; }
         public int SurfaceId { get; set; }
     
+        public virtual Surface Surface { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonalRecord> PersonalRecords { get; set; }
-        public virtual Surface Surface1 { get; set; }
     }
 }

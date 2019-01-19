@@ -17,9 +17,9 @@ namespace GRCWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
+            this.Nicknames = new HashSet<Nickname>();
             this.PersonalRecords = new HashSet<PersonalRecord>();
             this.Roles = new HashSet<Role>();
-            this.Nicknames = new HashSet<Nickname>();
         }
     
         public int Id { get; set; }
@@ -30,17 +30,16 @@ namespace GRCWebsite.Models
         public bool IsRegistered { get; set; }
         public string Profile { get; set; }
         public string Gender { get; set; }
-        public string NickName { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string Undergraduate { get; set; }
         public string Graduate { get; set; }
         public string AdditionalSchools { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Nickname> Nicknames { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonalRecord> PersonalRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role> Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Nickname> Nicknames { get; set; }
     }
 }
