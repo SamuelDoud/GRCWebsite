@@ -28,10 +28,10 @@ namespace GRCWebsite.Models
         }
     
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Nickname> Nicknames { get; set; }
         public virtual DbSet<PersonalRecord> PersonalRecords { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Nickname> Nicknames { get; set; }
         public virtual DbSet<Surface> Surfaces { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> CanRegister(string email)
