@@ -12,6 +12,10 @@
         <AssociationConnector Association="GRCDBModel.FK_PersonalRecords_Person" />
         <EntityTypeShape EntityType="GRCDBModel.Role" Width="1.5" PointX="3" PointY="5.625" />
         <AssociationConnector Association="GRCDBModel.FK_Roles_Person" />
+        <EntityTypeShape EntityType="GRCDBModel.Nickname" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="GRCDBModel.Surface" Width="1.5" PointX="0.875" PointY="12.125" />
+        <AssociationConnector Association="GRCDBModel.FK_Events_Surfaces" />
+        <AssociationConnector Association="GRCDBModel.FK_Nicknames_Person" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

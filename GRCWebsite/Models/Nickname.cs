@@ -12,17 +12,11 @@ namespace GRCWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PersonalRecord
+    public partial class Nickname
     {
         public int PersonId { get; set; }
-        public int EventId { get; set; }
-        public System.TimeSpan Time { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string RaceName { get; set; }
-        public bool GRC { get; set; }
-        public string Notes { get; set; }
+        public string NickName1 { get; set; }
     
-        public virtual Event Event { get; set; }
         public virtual Person Person { get; set; }
     }
 }

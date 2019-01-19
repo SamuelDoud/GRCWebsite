@@ -71,6 +71,8 @@
     <Build Include="GRC\Tables\Events.sql" />
     <Build Include="GRC\Tables\Surfaces.sql" />
     <Build Include="GRC\Tables\Nicknames.sql" />
+    <Build Include="GRC\Stored Procedures\spCanRegister.sql" />
+    <Build Include="GRC\Stored Procedures\spRegisterPerson.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="GRCDB.refactorlog" />

@@ -11,7 +11,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Distance" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Surface" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SurfaceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nicknames">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="NickName" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonalRecords">
           <Key>
@@ -24,6 +32,7 @@
           <Property Name="Date" Type="date" />
           <Property Name="RaceName" Type="nvarchar" MaxLength="50" />
           <Property Name="GRC" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="Persons">
           <Key>
@@ -31,8 +40,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar" MaxLength="64" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="64" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="16" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsRegistered" Type="bit" Nullable="false" />
@@ -53,6 +61,37 @@
           <Property Name="BeginDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
         </EntityType>
+        <EntityType Name="Surfaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surface" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Events_Surfaces">
+          <End Role="Surfaces" Type="Self.Surfaces" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Surfaces">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="SurfaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nicknames_Person">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Nicknames" Type="Self.Nicknames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nicknames">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonalRecords_Event">
           <End Role="Events" Type="Self.Events" Multiplicity="1" />
           <End Role="PersonalRecords" Type="Self.PersonalRecords" Multiplicity="*" />
@@ -89,11 +128,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spCanRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="grc">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spRegisterPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="grc">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="GRCDBModelStoreContainer">
           <EntitySet Name="Events" EntityType="Self.Events" Schema="grc" store:Type="Tables" />
+          <EntitySet Name="Nicknames" EntityType="Self.Nicknames" Schema="grc" store:Type="Tables" />
           <EntitySet Name="PersonalRecords" EntityType="Self.PersonalRecords" Schema="grc" store:Type="Tables" />
           <EntitySet Name="Persons" EntityType="Self.Persons" Schema="grc" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="grc" store:Type="Tables" />
+          <EntitySet Name="Surfaces" EntityType="Self.Surfaces" Schema="grc" store:Type="Tables" />
+          <AssociationSet Name="FK_Events_Surfaces" Association="Self.FK_Events_Surfaces">
+            <End Role="Surfaces" EntitySet="Surfaces" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nicknames_Person" Association="Self.FK_Nicknames_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Nicknames" EntitySet="Nicknames" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersonalRecords_Event" Association="Self.FK_PersonalRecords_Event">
             <End Role="Events" EntitySet="Events" />
             <End Role="PersonalRecords" EntitySet="PersonalRecords" />
@@ -128,6 +183,22 @@
             <End Role="Person" EntitySet="Persons" />
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
+          <EntitySet Name="Nicknames" EntityType="GRCDBModel.Nickname" />
+          <EntitySet Name="Surfaces" EntityType="GRCDBModel.Surface" />
+          <AssociationSet Name="FK_Events_Surfaces" Association="GRCDBModel.FK_Events_Surfaces">
+            <End Role="Surface" EntitySet="Surfaces" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nicknames_Person" Association="GRCDBModel.FK_Nicknames_Person">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Nickname" EntitySet="Nicknames" />
+          </AssociationSet>
+          <FunctionImport Name="CanRegister" ReturnType="Collection(Boolean)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegisterPerson">
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -137,6 +208,8 @@
           <Property Name="Distance" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Surface" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PersonalRecords" Relationship="GRCDBModel.FK_PersonalRecords_Event" FromRole="Event" ToRole="PersonalRecord" />
+          <Property Name="SurfaceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Surface1" Relationship="GRCDBModel.FK_Events_Surfaces" FromRole="Event" ToRole="Surface" />
         </EntityType>
         <EntityType Name="PersonalRecord">
           <Key>
@@ -151,6 +224,7 @@
           <Property Name="GRC" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Event" Relationship="GRCDBModel.FK_PersonalRecords_Event" FromRole="PersonalRecord" ToRole="Event" />
           <NavigationProperty Name="Person" Relationship="GRCDBModel.FK_PersonalRecords_Person" FromRole="PersonalRecord" ToRole="Person" />
+          <Property Name="Notes" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -158,7 +232,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsRegistered" Type="Boolean" Nullable="false" />
@@ -171,6 +245,7 @@
           <Property Name="Undergraduate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Graduate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AdditionalSchools" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Nicknames" Relationship="GRCDBModel.FK_Nicknames_Person" FromRole="Person" ToRole="Nickname" />
         </EntityType>
         <Association Name="FK_PersonalRecords_Event">
           <End Type="GRCDBModel.Event" Role="Event" Multiplicity="1" />
@@ -219,6 +294,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Nickname">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="NickName1" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="NickName1" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Person" Relationship="GRCDBModel.FK_Nicknames_Person" FromRole="Nickname" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Surface">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surface1" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Events" Relationship="GRCDBModel.FK_Events_Surfaces" FromRole="Surface" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_Events_Surfaces">
+          <End Type="GRCDBModel.Surface" Role="Surface" Multiplicity="1" />
+          <End Type="GRCDBModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Surface">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="SurfaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nicknames_Person">
+          <End Type="GRCDBModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GRCDBModel.Nickname" Role="Nickname" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nickname">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -228,7 +344,7 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="GRCDBModel.Event">
               <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="Surface" ColumnName="Surface" />
+                <ScalarProperty Name="SurfaceId" ColumnName="SurfaceId" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -237,6 +353,7 @@
           <EntitySetMapping Name="PersonalRecords">
             <EntityTypeMapping TypeName="GRCDBModel.PersonalRecord">
               <MappingFragment StoreEntitySet="PersonalRecords">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="GRC" ColumnName="GRC" />
                 <ScalarProperty Name="RaceName" ColumnName="RaceName" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -253,7 +370,6 @@
                 <ScalarProperty Name="Graduate" ColumnName="Graduate" />
                 <ScalarProperty Name="Undergraduate" ColumnName="Undergraduate" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Profile" ColumnName="Profile" />
                 <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
@@ -275,6 +391,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Nicknames">
+            <EntityTypeMapping TypeName="GRCDBModel.Nickname">
+              <MappingFragment StoreEntitySet="Nicknames">
+                <ScalarProperty Name="NickName1" ColumnName="NickName" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surfaces">
+            <EntityTypeMapping TypeName="GRCDBModel.Surface">
+              <MappingFragment StoreEntitySet="Surfaces">
+                <ScalarProperty Name="Surface1" ColumnName="Surface" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CanRegister" FunctionName="GRCDBModel.Store.spCanRegister" />
+          <FunctionImportMapping FunctionImportName="RegisterPerson" FunctionName="GRCDBModel.Store.spRegisterPerson" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

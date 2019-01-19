@@ -12,6 +12,8 @@ namespace GRCWebsite.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class GRCDBEntities : DbContext
     {
@@ -29,5 +31,25 @@ namespace GRCWebsite.Models
         public virtual DbSet<PersonalRecord> PersonalRecords { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Nickname> Nicknames { get; set; }
+        public virtual DbSet<Surface> Surfaces { get; set; }
+    
+        public virtual ObjectResult<Nullable<bool>> CanRegister(string email)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("CanRegister", emailParameter);
+        }
+    
+        public virtual int RegisterPerson(string email)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterPerson", emailParameter);
+        }
     }
 }

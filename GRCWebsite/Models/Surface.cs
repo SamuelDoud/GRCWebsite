@@ -12,17 +12,18 @@ namespace GRCWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PersonalRecord
+    public partial class Surface
     {
-        public int PersonId { get; set; }
-        public int EventId { get; set; }
-        public System.TimeSpan Time { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string RaceName { get; set; }
-        public bool GRC { get; set; }
-        public string Notes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Surface()
+        {
+            this.Events = new HashSet<Event>();
+        }
     
-        public virtual Event Event { get; set; }
-        public virtual Person Person { get; set; }
+        public int Id { get; set; }
+        public string Surface1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

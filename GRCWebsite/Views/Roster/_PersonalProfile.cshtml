@@ -1,10 +1,10 @@
 ﻿@using GRCWebsite.Models
 @model GRCWebsite.Models.ProfileModel
 
-<!-- Need a PR view-->
+
 (@Model.Person.Profile)
 
-
+@Model.Person.Profile
 
 <table class="table">
     <thead class="thead-light">
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
         @{
-            List<Event> events = Model.PersonalRecords.Select(pr => pr.Event).OrderBy(pr => pr.Distance).ToList();
+            List<Event> events = Model.PersonalRecords.Select(pr => pr.Event).OrderBy(pr => pr.Distance).ThenBy(pr => pr.Surface).ToList();
 
             foreach (Event e in events)
             {
@@ -25,9 +25,9 @@
                 if (tempRecord.Time != null)
                 {
                 <tr>
-                    <th scope="row">@(e.Distance)</th>
+                    <th scope="row">@(e.Surface + e.Distance.ToString())</th>
                     <td>@(tempRecord.Time)</td>
-                    <td>@(tempRecord.Date.Value.ToLongTimeString()</td>
+                    <td>@(tempRecord.Date.Value.ToLongTimeString())</td>
                     <td>@(tempRecord.RaceName)</td>
                 </tr>
                     }

@@ -149,27 +149,32 @@ namespace GRCWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            using (var context = new GRCDBEntities())
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (context.CanRegister(model.Email).SingleOrDefault().Value)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    if (ModelState.IsValid)
+                    {
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                    }
                 }
-                AddErrors(result);
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -177,11 +182,16 @@ namespace GRCWebsite.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
+            IdentityResult result;
             if (userId == null || code == null)
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            using (var context = new GRCDBEntities())
+            {
+                result = await UserManager.ConfirmEmailAsync(userId, code);
+                context.RegisterPerson(userId);
+            }
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 

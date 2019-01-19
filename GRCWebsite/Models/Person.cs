@@ -19,6 +19,7 @@ namespace GRCWebsite.Models
         {
             this.PersonalRecords = new HashSet<PersonalRecord>();
             this.Roles = new HashSet<Role>();
+            this.Nicknames = new HashSet<Nickname>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace GRCWebsite.Models
         public virtual ICollection<PersonalRecord> PersonalRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role> Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Nickname> Nicknames { get; set; }
     }
 }
