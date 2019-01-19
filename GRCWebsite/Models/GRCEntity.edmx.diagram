@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e6967150fb594799a2c2c3cdb39cdf17" Name="Diagram1">
-        <EntityTypeShape EntityType="GRCDBModel.Event" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="GRCDBModel.PersonalRecord" Width="1.5" PointX="3" PointY="2.25" />
-        <EntityTypeShape EntityType="GRCDBModel.Person" Width="1.5" PointX="0.75" PointY="2" />
-        <AssociationConnector Association="GRCDBModel.FK_PersonalRecords_Event" />
-        <AssociationConnector Association="GRCDBModel.FK_PersonalRecords_Person" />
-        <EntityTypeShape EntityType="GRCDBModel.Role" Width="1.5" PointX="3" PointY="5.625" />
-        <AssociationConnector Association="GRCDBModel.FK_Roles_Person" />
-        <EntityTypeShape EntityType="GRCDBModel.Nickname" Width="1.5" PointX="3.125" PointY="0.5" />
-        <EntityTypeShape EntityType="GRCDBModel.Surface" Width="1.5" PointX="0.875" PointY="12.125" />
+        <EntityTypeShape EntityType="GRCDBModel.Event" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GRCDBModel.Nickname" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="GRCDBModel.PersonalRecord" Width="1.5" PointX="6" PointY="4.375" />
+        <EntityTypeShape EntityType="GRCDBModel.Person" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GRCDBModel.Role" Width="1.5" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="GRCDBModel.Surface" Width="1.5" PointX="1.5" PointY="1.125" />
         <AssociationConnector Association="GRCDBModel.FK_Events_Surfaces" />
+        <AssociationConnector Association="GRCDBModel.FK_PersonalRecords_Event" />
         <AssociationConnector Association="GRCDBModel.FK_Nicknames_Person" />
+        <AssociationConnector Association="GRCDBModel.FK_PersonalRecords_Person" />
+        <AssociationConnector Association="GRCDBModel.FK_Roles_Person" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
