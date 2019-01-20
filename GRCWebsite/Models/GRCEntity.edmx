@@ -131,6 +131,9 @@
         <Function Name="spCanRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="grc">
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spGetPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="grc">
+          <Parameter Name="PersonId" Type="int" Mode="In" />
+        </Function>
         <Function Name="spRegisterPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="grc">
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
@@ -199,6 +202,9 @@
             <End Role="Person" EntitySet="Persons" />
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
+          <FunctionImport Name="GetPerson" EntitySet="Persons" ReturnType="Collection(GRCDBModel.Person)">
+            <Parameter Name="PersonId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -333,6 +339,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spGetPerson_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="16" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsRegistered" Nullable="false" />
+          <Property Type="String" Name="Profile" Nullable="true" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="String" Name="Undergraduate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Graduate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AdditionalSchools" Nullable="true" MaxLength="64" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -407,6 +427,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPerson" FunctionName="GRCDBModel.Store.spGetPerson">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

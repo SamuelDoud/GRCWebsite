@@ -18,8 +18,10 @@ INSERT INTO [grc].[Persons] ([Name], Email, Gender, IsActive, BirthDate, Undergr
 VALUES
 	('Nina May Brekelmans', 'Nina', 'F', 0, '1990-03-06', 'Dartmouth College', Null, Null),
 	('Lauren Woodall Roady', 'Lauren', 'F', 0, '1985-10-20', 'Davidson College', NULL, Null),
-	('Jerry Alexander', 'jerry.alexander@live.com', 'M', 1, NULL, 'Columbia University', 'Villanova University', Null),
-	('Samuel Doud', 'samueldoud@me.com', 'M', 1, '1995-10-23', 'American University', NULL, 'A Test');
+	('Jerry Alexander', 'jerry.alexander@this-aint-it-ya-bot.com', 'M', 1, NULL, 'Columbia University', 'Villanova University', Null),
+	('Samuel Doud', 'samueldoud@me.com', 'M', 1, '1995-10-23', 'American University', NULL, 'A Test'),
+	('Test Pass', 'testPass@test.com', 'M', 1, '1976-07-04', 'Straight A University', NULL, 'A Test Passed'),
+	('Test Fail', 'testFail@test.com', 'M', 1, '3000-07-04', 'School of Hard Knocks', NULL, 'A Test Failed');
 
 INSERT INTO [grc].[PersonalRecords] (PersonId, EventId, [Time], [Date], GRC)
 VALUES (4, 1, '2:19:52', '2018-12-02', 1)

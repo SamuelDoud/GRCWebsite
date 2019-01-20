@@ -220,6 +220,9 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>GRCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spGetPerson_Result.cs">
+      <DependentUpon>GRCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Surface.cs">
       <DependentUpon>GRCEntity.tt</DependentUpon>
     </Compile>

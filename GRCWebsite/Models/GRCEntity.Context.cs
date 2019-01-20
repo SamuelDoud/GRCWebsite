@@ -51,5 +51,23 @@ namespace GRCWebsite.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterPerson", emailParameter);
         }
+    
+        public virtual ObjectResult<Person> GetPerson(Nullable<int> personId)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Person>("GetPerson", personIdParameter);
+        }
+    
+        public virtual ObjectResult<Person> GetPerson(Nullable<int> personId, MergeOption mergeOption)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Person>("GetPerson", mergeOption, personIdParameter);
+        }
     }
 }
